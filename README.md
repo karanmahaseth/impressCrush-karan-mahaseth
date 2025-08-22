@@ -1,51 +1,87 @@
-# Astro on Netlify Platform Starter
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposal 💕</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffd6e0;
+      text-align: center;
+      padding-top: 100px;
+    }
+    img {
+      width: 120px;
+      margin: 20px 0;
+    }
+    .buttons {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #ff6f91;
+      color: white;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #ff3e68;
+    }
+    #noBtn {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
 
-[Live Demo](https://astro-platform-starter.netlify.app/)
+  <h2 id="message">Will you be mine forever? 🥰</h2>
+  <img id="gif" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="cute">
+  
+  <div class="buttons">
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 😢</button>
+  </div>
 
-A modern starter based on Astro.js, Tailwind, and [Netlify Core Primitives](https://docs.netlify.com/core/overview/#develop) (Edge Functions, Image CDN, Blob Store).
+  <script>
+    const message = document.getElementById("message");
+    const gif = document.getElementById("gif");
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
 
-## Astro Commands
+    let noClicks = 0;
 
-All commands are run from the root of the project, from a terminal:
+    const responses = [
+      "Please think again! 🙄",
+      "Itni jaldi mat bolo na 😢",
+      "Baby man jao na! Kitna bhav khaogi 😭",
+      "Bht glt baat hai yaar 😤",
+      "Ab toh haan bol do 🥺"
+    ];
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+    noBtn.addEventListener("click", () => {
+      if (noClicks < responses.length) {
+        message.textContent = responses[noClicks];
+        noClicks++;
+      } else {
+        // Make the "No" button run away 😂
+        noBtn.style.position = "absolute";
+        noBtn.style.top = Math.random() * window.innerHeight + "px";
+        noBtn.style.left = Math.random() * window.innerWidth + "px";
+      }
+    });
 
-## Deploying to Netlify
+    yesBtn.addEventListener("click", () => {
+      message.textContent = "Yay! I knew you'd say YES 💍🥳";
+      gif.src = "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif";
+      noBtn.style.display = "none";
+      yesBtn.style.display = "none";
+    });
+  </script>
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/astro-platform-starter)
-
-## Developing Locally
-
-| Prerequisites                                                                |
-| :--------------------------------------------------------------------------- |
-| [Node.js](https://nodejs.org/) v18.14+.                                      |
-| (optional) [nvm](https://github.com/nvm-sh/nvm) for Node version management. |
-
-1. Clone this repository, then run `npm install` in its root directory.
-
-2. For the starter to have full functionality locally (e.g. edge functions, blob store), please ensure you have an up-to-date version of Netlify CLI. Run:
-
-```
-npm install netlify-cli@latest -g
-```
-
-3. Link your local repository to the deployed Netlify site. This will ensure you're using the same runtime version for both local development and your deployed site.
-
-```
-netlify link
-```
-
-4. Then, run the Astro.js development server via Netlify CLI:
-
-```
-netlify dev
-```
-
-If your browser doesn't navigate to the site automatically, visit [localhost:8888](http://localhost:8888).
+</body>
+</html>
